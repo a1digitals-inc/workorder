@@ -1,0 +1,6 @@
+/.idea
+/docker
+/ginapi
+/go.sum
+/test.go
+
