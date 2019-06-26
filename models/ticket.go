@@ -46,3 +46,14 @@ func AddTicket(name string, state uint8, createBy string) bool  {
 	})
 	return  true
 }
+
+func DeleteTicket(id int)  bool {
+	db.Where("id = ?", id).Delete(&Ticket{})
+	return true
+}
+
+func EditTicket(id int, data interface{}) bool  {
+	db.Model(&Ticket{}).Where("id = ?", id).Update(data)
+	return  true
+}
+
