@@ -5,6 +5,7 @@ import (
 	"ginapi/pkg/setting"
 	"github.com/jinzhu/gorm"
 	"log"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Model struct {

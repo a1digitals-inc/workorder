@@ -16,14 +16,33 @@ type Ticket struct {
 	StudentName string `json:"student_name"`
 	Status      uint8  `json:"status"`
 	IsTasked    int8   `json:"is_tasked"`
+	CreatedAt	string	`json:"created_at"`
 }
 
 func GetTickets(pageNum int, pageSize int, maps interface{}) (tickets []Ticket) {
-	//db.Where(maps).Offset(pageNum).Limit(pageSize).Find(&tickets)
+	db.Where(maps).Offset(pageNum).Limit(pageSize).Find(&tickets)
 	return
 }
 
 func GetTotalTickets(maps interface{}) (count int) {
 	db.Model(&Ticket{}).Where(maps).Count(&count)
 	return
+}
+
+func ExistTicketByName(name string) bool {
+	var ticket Ticket
+	db.Select("id").Where("name = ?", name).First(ticket)
+	if ticket.ID >0 {
+		return  true
+	}
+	return  false
+}
+
+func AddTicket(name string, state uint8, createBy string) bool  {
+	db.Create(Ticket{
+		KsuName:name,
+		Status:state,
+		CreatedAt:createBy,
+	})
+	return  true
 }
