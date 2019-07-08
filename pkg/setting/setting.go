@@ -67,7 +67,7 @@ func loadDataBase() {
 	DB_USER = sec.Key("USER").MustString("")
 	DB_PASSWORD = sec.Key("PASSWORD").MustString("")
 	DB_HOST = sec.Key("HOST").MustString("")
-	DB_PROT = sec.Key("PROT").MustInt(3306)
+	DB_PROT = sec.Key("PORT").MustInt(3306)
 	// TODO 如果键不存在会怎么样
 	DB_NAME = sec.Key("NAME").String()
 	TABLE_PREFIX = sec.Key("TABLE_PREFIX").String()

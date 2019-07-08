@@ -6,7 +6,6 @@ import (
 	"ginapi/pkg/setting"
 	"ginapi/pkg/util"
 	"github.com/Unknwon/com"
-	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -47,29 +46,6 @@ func GetTicket(c *gin.Context) {
 	})
 }
 
-func AddTag(c *gin.Context)  {
-	name :=c.Query("name")
-	state := com.StrTo(c.DefaultQuery("state", "0")).MustUint8()
-	createdAt := c.Query("created_by")
 
-	valid := validation.Validation{}
-	valid.Required(name, "name").Message("名称不能为空")
-	valid.MaxSize(name, 100, "name").Message("最长 100 字符")
-	valid.Required(createdAt, "created_at").Message("时间不能为空")
-	valid.Range(state, 0, 1, "state").Message("状态只能为0 和 1")
-	code := e.INVALID_PARAMS
-	if !valid.HasErrors() {
-		if !models.ExistTicketByName(name) {
-			models.AddTicket(name,state,createdAt)
-		} else {
-			code = e.ERROR_EXIST_TAG
-		}
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"code":code,
-		"msg":e.GetMssg(code),
-		"data":make(map[string]string),
-	})
-}
 
 
