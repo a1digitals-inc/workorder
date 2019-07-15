@@ -6,6 +6,7 @@ require (
 	github.com/Unknwon/com v0.0.0-20190321035513-0fed4efef755
 	github.com/alecthomas/gometalinter v3.0.0+incompatible // indirect
 	github.com/astaxie/beego v1.11.1
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/google/shlex v0.0.0-20181106134648-c34317bd91bf // indirect

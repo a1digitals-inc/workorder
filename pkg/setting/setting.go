@@ -25,6 +25,7 @@ var (
 	DB_PROT      int
 	DB_NAME      string
 	TABLE_PREFIX string
+
 )
 
 func init() {
