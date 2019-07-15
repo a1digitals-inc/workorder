@@ -1,5 +1,7 @@
 package models
 
+import "fmt"
+
 type Ticket struct {
 	Model
 
@@ -53,7 +55,9 @@ func DeleteTicket(id int)  bool {
 }
 
 func EditTicket(id int, data interface{}) bool  {
-	db.Model(&Ticket{}).Where("id = ?", id).Update(data)
+	db.Model(&Ticket{}).Where("id = ?", id).Updates(data).Debug()
+	//db.Model(&Tag{}).Where("id = ?", id).Update(data)
+	fmt.Println(id, data)
 	return  true
 }
 

@@ -54,8 +54,8 @@ func AddArticle(data map[string]interface{}) bool {
 }
 
 
-func GetArticles(pageNum int, pageSize int, maps interface{})(articles []Article)  {
-	db.Preload("Tag").Where(maps).Limit(pageSize).Offset(pageNum).Find(&articles)
+func GetArticles(pageNum int, pageSize int, maps interface {}) (articles []Article) {
+	db.Debug().Preload("Tag").Where(maps).Offset(pageNum).Limit(pageSize).Find(&articles)
 	return
 }
 
