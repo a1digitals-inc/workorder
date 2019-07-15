@@ -178,5 +178,28 @@ func validateForEdit(ctx *gin.Context)(req map[string]interface{})  {
 }
 
 func DeleteArticle(c *gin.Context)  {
+	id := com.StrTo(c.Query("id")).MustInt()
 
+	valid := validation.Validation{}
+	valid.Min(id, 1, "id").Message("ID必须大于0")
+
+	code := e.SUCCESS
+	if valid.HasErrors() {
+		code = e.INVALID_PARAMS
+		for _, err := range valid.Errors {
+			log.Println(err)
+		}
+	} else {
+		if models.ExistArticleById(id) {
+			models.DeleteArticle(id)
+		} else {
+			code = e.ERROR_NOT_EXIST_ARTICLE
+		}
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code" : code,
+		"msg" : e.GetMssg(code),
+		"data" : make(map[string]interface{}),
+	})
 }

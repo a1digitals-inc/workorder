@@ -69,3 +69,8 @@ func (article *Article) BeforeUpdate(scope *gorm.Scope) error {
 	scope.SetColumn("ModifiedOn", time.Now().Unix())
 	return nil
 }
+
+func DeleteArticle(id int)  bool {
+	db.Where("id = ?", id).Delete(&Article{})
+	return true
+}
